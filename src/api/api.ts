@@ -17,3 +17,5 @@ export const checkMe = () => instance.get('auth/check');
 export const signIn = (email: string, password: string) => instance.post('auth/login', { email, password });
 
 export const logout = () => instance.delete('auth/logout');
+
+export const getBrandsNames = () => instance.get('brands/index/names');

@@ -13,7 +13,7 @@ const Wrapper = styled.div<ILabelProps>`
 const Label = styled.label<ILabelProps>`
     display: flex;
     align-items: center;
-    color: #fff;
+    color: #000;
     gap: 2rem;
 `;
 
@@ -21,7 +21,7 @@ const Radio = styled.div<ILabelProps>`
     position: relative;
     width: 3rem;
     height: 3rem;
-    border: 5px solid blue;
+    border: 5px solid #000;
     border-radius: 50%;
     background: white;
     cursor: pointer;
@@ -33,7 +33,7 @@ const Radio = styled.div<ILabelProps>`
         transform: translate(-50%, -50%);
         height: 50%;
         width: 50%; 
-        background: ${props => props.checked ? 'blue' : 'white'};
+        background: ${props => props.checked ? '#000' : 'white'};
         border-radius: 50%;
 
         visibility: ${props => props.checked ? 'visible' : 'hidden'};
