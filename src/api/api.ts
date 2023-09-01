@@ -16,6 +16,9 @@ export const createCar = (name: string, brandName: string, wheelPosition: WheelT
     name, wheelPosition, brandName
 });
 
+export const updateCar = (id: string, name: string, brandName: string, wheelPosition: WheelType) => instance.put(`cars/update/${id}`, {
+    name, brandName, wheelPosition
+});
 
 
 export const checkMe = () => instance.get('auth/check');

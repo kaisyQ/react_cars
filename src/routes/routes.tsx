@@ -20,7 +20,7 @@ const routes: IRoute[] = [
         element: <CarCreateForm />
     },
     {
-        path: '/cars/update',
+        path: '/cars/update/:id',
         element: <CarUpdateForm />
     },
     {
