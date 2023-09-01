@@ -1,7 +1,8 @@
 import Cars from "../components/Cars/Cars";
 import CarAbout from "../components/CarAbout/CarAbout";
-import CarForm from "../components/CarForm/CarForm";
-
+import Login from "../components/Login/Login";
+import CarUpdateForm from "../components/CarUpdateForm/CarUpdateForm";
+import CarCreateForm from "../components/CarCreateForm/CarCreateForm";
 
 import type { IRoute } from "../types/types";
 
@@ -16,8 +17,16 @@ const routes: IRoute[] = [
     },
     {
         path: '/cars/create',
-        element: <CarForm />
-    }
+        element: <CarCreateForm />
+    },
+    {
+        path: '/cars/update',
+        element: <CarUpdateForm />
+    },
+    {
+        path: '/login',
+        element: <Login />
+    },
 ];
 
 export default routes;

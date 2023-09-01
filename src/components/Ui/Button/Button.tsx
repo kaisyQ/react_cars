@@ -1,20 +1,10 @@
 import styled from "styled-components";
 
-const Wrapper = styled.nav`
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-`;
-
-const BtnWrapper = styled.div`
-`;
-
-const  Btn = styled.button`
+const Button = styled.button`
     position: relative;
     padding: 1rem 3rem;
     background-color: #fff;
+    border: 2px solid #000;
     cursor: pointer;
 
     transition: .4s ease-in-out;
@@ -44,6 +34,4 @@ const  Btn = styled.button`
     }
 `;
 
-export default {
-    Wrapper, BtnWrapper, Btn
-};
+export default Button;

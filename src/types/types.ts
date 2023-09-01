@@ -1,4 +1,4 @@
-
+import { LEFT_WHEEL, RIGHT_WHEEL } from "../constants/constants";
 
 export interface IRoute {
     path: string,
@@ -6,7 +6,7 @@ export interface IRoute {
 }
 
 
-export type WheelType = 'Левый руль' | 'Правый руль';
+export type WheelType = typeof LEFT_WHEEL | typeof RIGHT_WHEEL;
 
 export interface IBrand {
     

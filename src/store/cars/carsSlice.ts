@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import type { ICar } from '../../types/types';
 
@@ -22,8 +22,6 @@ const carsSlice = createSlice({
     initialState,
     reducers: {
         setCars: (state, action) => {
-            console.log(action.payload)
-            debugger
             state.items = action.payload;
         },
         setCurrentCar: (state, action) => {

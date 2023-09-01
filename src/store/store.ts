@@ -1,10 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import carsReducer from './cars/carsSlice';
-
+import authReducer from './auth/authSlice';
 
 const reducer = combineReducers({
-    cars: carsReducer
+    cars: carsReducer,
+    auth: authReducer
 });
 
 

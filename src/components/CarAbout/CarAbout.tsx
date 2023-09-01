@@ -13,6 +13,7 @@ import { getCurrentCar } from '../../store/cars/carsSelector';
 import { setCurrentCar } from '../../store/cars/carsSlice';
 
 import Message from '../Message/Message';
+import { getCarById } from '../../api/api';
 
 const CarAbout = () => {
 
@@ -26,15 +27,17 @@ const CarAbout = () => {
         
         const fetch = async () => {
             
-            const response = await axios.get(`http://localhost:8000/models/${id}`);
-
-            dispatch(setCurrentCar(response.data));
+            if (id) {
+                
+                const response = await getCarById(id);
+                
+                dispatch(setCurrentCar(response.data));
+            
+            }
         }
 
         fetch();
-    }, [])
-
-    console.log(current)
+    }, []);
 
     return (
         <>
@@ -46,17 +49,23 @@ const CarAbout = () => {
                         <CarAboutElements.InfoWrapper>
 
                             <CarAboutElements.Model>
+                            
                                 {current.name}
+                            
                             </CarAboutElements.Model>
 
 
                             <CarAboutElements.Brand>
+                            
                                 {current.brand.name}
+                            
                             </CarAboutElements.Brand>
 
 
                             <CarAboutElements.RudderPostion>
+                            
                                 {current.brand.wheelPosition}
+                            
                             </CarAboutElements.RudderPostion>
 
                         </CarAboutElements.InfoWrapper>

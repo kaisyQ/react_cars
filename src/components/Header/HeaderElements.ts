@@ -3,28 +3,36 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
     padding: 2rem 1rem;
 
-    min-height: 150px;
+    min-height: 100px;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 
-    background-color: rgba(235, 186, 52);
+    background-color: black;
+    color: white;
+    
 `;
 
 const LogoWrapper = styled.div`
-    max-width: 200px;
+    max-width: 120px;
 `;
 
 
 const Logo = styled.img`
     display: block;
     width: 100%;
-    border-radius: 5px;
-    box-shadow: -2px 4px 21px 6px rgba(0,0,0,0.15);
+`;
 
+const UserWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+`;
+const Email = styled.span`
+    font-size: 1.6rem;
 `;
 
 export default {
-    Wrapper, LogoWrapper, Logo
+    Wrapper, LogoWrapper, Logo, UserWrapper, Email
 }

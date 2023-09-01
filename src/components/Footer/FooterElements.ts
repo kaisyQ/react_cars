@@ -14,7 +14,9 @@ const Wrapper = styled.div`
 
     justify-content: space-around;
 
-    background-color: rgba(235, 186, 52);
+    background-color: black;
+    
+    color: white;
     
 
     @media only screen and (max-width: 768px){
@@ -25,25 +27,20 @@ const Wrapper = styled.div`
 
 
 const LogoWrapper = styled.div`
-    max-width: 200px;
+    max-width: 160px;
 `;
 
 
 const Logo = styled.img`
     display: block;
     width: 100%;
-    border-radius: 5px;
-    box-shadow: -2px 4px 21px 6px rgba(0,0,0,0.15);
-
 `;
 
 const CopyRight = styled.p`
     text-align: center;
     padding: 3rem;
-    background-color: rgba(240, 86, 86);
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: -2px 4px 21px 6px rgba(0,0,0,0.15);
+    background-color: #fff;
+    color: #000;
 `;
 
 export default {

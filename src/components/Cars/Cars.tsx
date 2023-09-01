@@ -11,6 +11,7 @@ import { getCarsItems } from '../../store/cars/carsSelector';
 import { setCars } from '../../store/cars/carsSlice';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+
 import { getCars } from '../../api/api';
 
 
@@ -24,10 +25,13 @@ const Cars = () => {
 
     React.useEffect(() => {
         const fetch = async function () {
+            
             const response = await getCars();
+            
             dispatch(setCars(response.data.items));
+
         }
-        fetch()
+        fetch();
     }, [])
 
     return (

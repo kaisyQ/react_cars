@@ -5,7 +5,7 @@ const Wrapper = styled.div`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: rgba(240, 86, 86);
+    background-color: white;
     font-size: 2rem;
 `;
 
