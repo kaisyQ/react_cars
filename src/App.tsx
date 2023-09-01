@@ -6,6 +6,8 @@ import Header from './components/Header/Header';
 
 import Footer from './components/Footer/Footer';
 
+import CarsNav from './components/CarsNav/CarsNav';
+
 import AppElements from './AppElements';
 
 import { checkMe } from './api/api';
@@ -39,7 +41,9 @@ function App() {
     <AppElements.Wrapper className="App">
     
         <Header />     
-        
+
+        <CarsNav />
+
         <AppElements.ContentWrapper>
     
         

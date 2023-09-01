@@ -8,16 +8,19 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    gap: 2rem;
 
     background-color: black;
     color: white;
     
+    @media only screen and (max-width: 400px){
+        flex-direction: column;
+    }
 `;
 
 const LogoWrapper = styled.div`
     max-width: 120px;
 `;
-
 
 const Logo = styled.img`
     display: block;
@@ -28,6 +31,7 @@ const UserWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    margin: 0 1rem;
 `;
 const Email = styled.span`
     font-size: 1.6rem;

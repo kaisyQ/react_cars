@@ -20,10 +20,12 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 import { setBrandNames } from "../../store/brands/brandsSlice";
 
+import { createCar } from "../../api/api";
+
 const CarCreateForm = () => {
 
     const [name, setName] = React.useState('');
-    const [brand, setBrand] = React.useState('');
+    const [brandName, setBrandName] = React.useState('');
     const [letfWheel, setLeftWheel] = React.useState(false);
 
     const dispatch = useAppDispatch();
@@ -41,7 +43,7 @@ const CarCreateForm = () => {
     }, [])
 
     const handleBrandNameSelect = (option: string) => {
-        setBrand(option);
+        setBrandName(option);
     }   
 
     const leftRadioChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,10 +87,16 @@ const CarCreateForm = () => {
                     
                     </CarCreateFormElements.RadioWrapper>
                     
-                    <Button onClick={(ev) => {
+                    <Button onClick={async (ev) => {
                         ev.preventDefault();
-                        console.log(name, brand, letfWheel)
+                        
+                        const response = await createCar(
+                            name, brandName, letfWheel ? LEFT_WHEEL : RIGHT_WHEEL
+                        );
 
+                        console.log(response);
+                        
+                        
                     }}>Create</Button>
                 
                 </CarCreateFormElements.Form>

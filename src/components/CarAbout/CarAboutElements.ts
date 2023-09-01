@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    padding: 4rem 0 4rem 5rem;
+    margin: 3rem 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 `;
 
 const InfoWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    @media only screen and (max-width: 300px) { 
+        text-align: center;
+    }
 `;
 
 const Brand = styled.h3`
