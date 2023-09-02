@@ -1,5 +1,7 @@
 import { LEFT_WHEEL, RIGHT_WHEEL } from "../constants/constants";
 
+import { ROLE_USER, ROLE_ADMIN, ROLE_MANAGER } from "../constants/constants";
+
 export interface IRoute {
     path: string,
     element: React.ReactNode
@@ -32,3 +34,5 @@ export interface ICar {
     brand: IBrand
 
 }
+
+export type RoleType = typeof ROLE_USER | typeof ROLE_MANAGER | typeof ROLE_ADMIN; 

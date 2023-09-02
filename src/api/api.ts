@@ -20,6 +20,9 @@ export const updateCar = (id: string, name: string, brandName: string, wheelPosi
     name, brandName, wheelPosition
 });
 
+export const deleteCar = (id: string) => instance.delete(`cars/delete/${id}`);
+
+
 
 export const checkMe = () => instance.get('auth/check');
 

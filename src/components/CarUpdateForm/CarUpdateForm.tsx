@@ -62,7 +62,6 @@ const CarUpdateForm = () => {
             }
             
             const response = await getCarById(id);
-            console.log(response);
 
             dispatch(setCurrentCar(response.data));
         }

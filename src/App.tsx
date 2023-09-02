@@ -14,7 +14,11 @@ import { checkMe } from './api/api';
 
 import { useAppDispatch } from './hooks/hooks';
 
-import { setEmail, setIsAuth, setRoles } from './store/auth/authSlice';
+import { setEmail, setIsAuth, setRole } from './store/auth/authSlice';
+
+import type { RoleType } from './types/types';
+
+import { ROLE_ADMIN, ROLE_MANAGER, ROLE_USER } from './constants/constants';
 
 function App() {
 
@@ -25,10 +29,27 @@ function App() {
     const fetch = async () => {
   
       const response = await checkMe();
+      
       if (response.data) {
         dispatch(setEmail(response.data.email));
-        dispatch(setRoles(response.data.roles));
         dispatch(setIsAuth(true));
+        
+        const roles: Array<RoleType> = response.data.roles;
+        
+        if(roles.find(role => role === ROLE_ADMIN)) {
+          dispatch(setRole(ROLE_ADMIN));
+          return;
+        }
+        
+        if(roles.find(role => role === ROLE_MANAGER)) {
+          dispatch(setRole(ROLE_MANAGER));
+          return;
+        }
+        
+        if(roles.find(role => role === ROLE_USER)) {
+          dispatch(setRole(ROLE_USER));
+          return;
+        }
       }
     } 
   

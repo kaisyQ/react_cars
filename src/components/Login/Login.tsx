@@ -6,13 +6,17 @@ import { signIn } from "../../api/api";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
-import { setIsAuth, setEmail as setEmailStore, setRoles } from "../../store/auth/authSlice";
+import { setIsAuth, setEmail as setEmailStore, setRole } from "../../store/auth/authSlice";
 
 import Input from "../Ui/Input/Input";
 
 import Button from "../Ui/Button/Button";
 import { getIsAuth } from "../../store/auth/authSelector";
 import { Navigate } from "react-router-dom";
+
+import { ROLE_USER, ROLE_MANAGER, ROLE_ADMIN } from "../../constants/constants";
+
+import type { RoleType } from "../../types/types";
 
 const Login = () => {
     
@@ -30,9 +34,25 @@ const Login = () => {
         const response = await signIn(email, password);
     
         if (response.data) {
-            dispatch(setIsAuth(true));
             dispatch(setEmailStore(response.data.email));
-            dispatch(setRoles(response.data.roles));
+            dispatch(setIsAuth(true));
+            
+            const roles: Array<RoleType> = response.data.roles;
+            
+            if(roles.find(role => role === ROLE_ADMIN)) {
+                dispatch(setRole(ROLE_ADMIN));
+                return;
+            }
+            
+            if(roles.find(role => role === ROLE_MANAGER)) {
+                dispatch(setRole(ROLE_MANAGER));
+                return;
+            }
+            
+            if(roles.find(role => role === ROLE_USER)) {
+                dispatch(setRole(ROLE_USER));
+                return;
+            }
         }
     } 
 

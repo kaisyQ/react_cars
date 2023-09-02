@@ -16,7 +16,7 @@ import { BoxArrowRight } from 'react-bootstrap-icons';
 
 import { logout } from '../../api/api';
 
-import { setEmail, setRoles, setIsAuth } from '../../store/auth/authSlice';
+import { setEmail, setRole, setIsAuth } from '../../store/auth/authSlice';
 
 const Header = () => {
     
@@ -55,7 +55,7 @@ const Header = () => {
                                 const response = await logout();
                                 if (response.status === 200) {
                                     dispatch(setEmail(null)); 
-                                    dispatch(setRoles(null)); 
+                                    dispatch(setRole(null)); 
                                     dispatch(setIsAuth(false));
                                 }
                             }}>

@@ -6,25 +6,33 @@ import Button from "../Ui/Button/Button";
 
 import { NavLink } from "react-router-dom";
 
+import { useAppSelector } from "../../hooks/hooks";
+
+import { getRole } from "../../store/auth/authSelector";
+
+import { ROLE_ADMIN } from "../../constants/constants";
+
 const CarsNav = () => {
+
+    const role = useAppSelector(state => getRole(state));
+
     return (
         <>
-            <CarsNavElements.Wrapper>
-                <CarsNavElements.Nav>
-                    <NavLink to={'/cars/create'}>
+        {
+            role === ROLE_ADMIN ? <>
+                <CarsNavElements.Wrapper>
+                    <CarsNavElements.Nav>
 
-                        <Button>Create</Button>
+                        <NavLink to={'/cars/create'}>
 
-                    </NavLink>
-                    
-                    <NavLink to={'/cars/update'}>
+                            <Button>Create</Button>
 
-                        <Button>Update</Button>
-
-                    </NavLink>
-                    
-                </CarsNavElements.Nav>
-            </CarsNavElements.Wrapper>
+                        </NavLink>
+                        
+                    </CarsNavElements.Nav>
+                </CarsNavElements.Wrapper>
+            </> : null
+        }
         </>
     );
 }

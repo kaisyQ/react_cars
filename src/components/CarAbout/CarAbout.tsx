@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import CarAboutElements from './CarAboutElements';
 
-import {useParams} from 'react-router-dom';
+import {useParams, NavLink} from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 
@@ -13,7 +13,13 @@ import { getCurrentCar } from '../../store/cars/carsSelector';
 import { setCurrentCar } from '../../store/cars/carsSlice';
 
 import Message from '../Message/Message';
-import { getCarById } from '../../api/api';
+
+import { deleteCar, getCarById } from '../../api/api';
+
+import Button from '../Ui/Button/Button';
+import { getRole } from '../../store/auth/authSelector';
+import { ROLE_MANAGER, ROLE_ADMIN } from '../../constants/constants';
+
 
 const CarAbout = () => {
 
@@ -21,6 +27,8 @@ const CarAbout = () => {
 
     const current = useAppSelector(state => getCurrentCar(state));
 
+
+    const role = useAppSelector(state => getRole(state));
     const dispatch = useAppDispatch();
 
     React.useEffect(() => {
@@ -73,6 +81,30 @@ const CarAbout = () => {
                     </> : <Message />
                 }
 
+
+                
+                <div>
+                    {
+                        role === ROLE_ADMIN  || role === ROLE_MANAGER ? 
+                        <NavLink to={`/cars/update/${id}`}>
+                            <Button>Update</Button>
+                        </NavLink>
+                        : null
+                    }
+
+                    {
+                        role === ROLE_ADMIN  ? 
+                            <Button onClick={async () => {
+                                if (!id) {
+                                    return;
+                                }
+                                const response = await deleteCar(id);
+                                console.log(response);
+
+                            }}>Delete</Button>
+                        : null
+                    }
+                </div>
 
             </CarAboutElements.Wrapper>
         </>
