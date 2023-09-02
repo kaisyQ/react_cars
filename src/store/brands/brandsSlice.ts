@@ -14,13 +14,16 @@ const brandsSlice = createSlice({
     reducers: {
         setBrandNames: (state, action) => {
             state.brandNames = action.payload;
+        },
+        addBrandName: (state, action) => {
+            state.brandNames.push(action.payload);
         }
     }
 });
 
 const {actions, reducer} = brandsSlice;
 
-export const {setBrandNames} = actions;
+export const {setBrandNames, addBrandName} = actions;
 
 export default reducer;
 

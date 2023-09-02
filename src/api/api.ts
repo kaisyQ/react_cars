@@ -30,4 +30,8 @@ export const signIn = (email: string, password: string) => instance.post('auth/l
 
 export const logout = () => instance.delete('auth/logout');
 
+
+
 export const getBrandsNames = () => instance.get('brands/index/names');
+
+export const createBrand = (name: string) => instance.post('brands/create', { name });

@@ -22,6 +22,8 @@ import { setBrandNames } from "../../store/brands/brandsSlice";
 
 import { createCar } from "../../api/api";
 
+import AddBrand from "../AddBrand/AddBrand";
+
 const CarCreateForm = () => {
 
     const [name, setName] = React.useState('');
@@ -78,6 +80,8 @@ const CarCreateForm = () => {
                             />
                         </> : null
                     }
+
+                    <AddBrand />
                     
                     <CarCreateFormElements.RadioWrapper>
                     

@@ -83,7 +83,7 @@ const CarAbout = () => {
 
 
                 
-                <div>
+                <CarAboutElements.ControllBlock>
                     {
                         role === ROLE_ADMIN  || role === ROLE_MANAGER ? 
                         <NavLink to={`/cars/update/${id}`}>
@@ -104,7 +104,7 @@ const CarAbout = () => {
                             }}>Delete</Button>
                         : null
                     }
-                </div>
+                </CarAboutElements.ControllBlock>
 
             </CarAboutElements.Wrapper>
         </>
