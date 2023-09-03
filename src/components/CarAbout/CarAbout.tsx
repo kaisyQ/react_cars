@@ -1,86 +1,59 @@
 import React from 'react';
 
-import axios from 'axios';
-
 import CarAboutElements from './CarAboutElements';
 
-import {useParams, NavLink} from 'react-router-dom';
-
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-
-import { getCurrentCar } from '../../store/cars/carsSelector';
-
-import { setCurrentCar } from '../../store/cars/carsSlice';
+import { NavLink } from 'react-router-dom';
 
 import Message from '../Message/Message';
 
-import { deleteCar, getCarById } from '../../api/api';
-
 import Button from '../Ui/Button/Button';
-import { getRole } from '../../store/auth/authSelector';
+
 import { ROLE_MANAGER, ROLE_ADMIN } from '../../constants/constants';
 
+import type { ICar, RoleType } from '../../types/types';
 
-const CarAbout = () => {
+interface ICarAboutProps {
+    role: RoleType | null,
+    current: ICar,
+    id: string | number,
+    deleteCar: () => void
+}
 
-    const {id} = useParams();
+const CarAbout: React.FC<ICarAboutProps> = ({ current, role, id, deleteCar }) => {
 
-    const current = useAppSelector(state => getCurrentCar(state));
-
-
-    const role = useAppSelector(state => getRole(state));
-    const dispatch = useAppDispatch();
-
-    React.useEffect(() => {
-        
-        const fetch = async () => {
-            
-            if (id) {
-                
-                const response = await getCarById(id);
-                
-                dispatch(setCurrentCar(response.data));
-            
-            }
-        }
-
-        fetch();
-    }, []);
+    const onDeleteBtnClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
+        deleteCar();
+    }
 
     return (
         <>
             <CarAboutElements.Wrapper>
 
-                {
-                    current ? <>
                         
-                        <CarAboutElements.InfoWrapper>
+                <CarAboutElements.InfoWrapper>
 
-                            <CarAboutElements.Model>
-                            
-                                {current.name}
-                            
-                            </CarAboutElements.Model>
-
-
-                            <CarAboutElements.Brand>
-                            
-                                {current.brand.name}
-                            
-                            </CarAboutElements.Brand>
-
-
-                            <CarAboutElements.RudderPostion>
-                            
-                                {current.brand.wheelPosition}
-                            
-                            </CarAboutElements.RudderPostion>
-
-                        </CarAboutElements.InfoWrapper>
+                    <CarAboutElements.Model>
                     
-                    </> : <Message />
-                }
+                        {current.name}
+                    
+                    </CarAboutElements.Model>
 
+
+                    <CarAboutElements.Brand>
+                    
+                        {current.brand.name}
+                    
+                    </CarAboutElements.Brand>
+
+
+                    <CarAboutElements.RudderPostion>
+                    
+                        {current.brand.wheelPosition}
+                    
+                    </CarAboutElements.RudderPostion>
+
+                </CarAboutElements.InfoWrapper>
+                    
 
                 
                 <CarAboutElements.ControllBlock>
@@ -94,14 +67,7 @@ const CarAbout = () => {
 
                     {
                         role === ROLE_ADMIN  ? 
-                            <Button onClick={async () => {
-                                if (!id) {
-                                    return;
-                                }
-                                const response = await deleteCar(id);
-                                console.log(response);
-
-                            }}>Delete</Button>
+                            <Button onClick={onDeleteBtnClick}>Delete</Button>
                         : null
                     }
                 </CarAboutElements.ControllBlock>

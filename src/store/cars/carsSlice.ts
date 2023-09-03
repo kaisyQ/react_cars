@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import type { ICar } from '../../types/types';
-import { getCars } from '../../api/api';
+import { deleteCar, getCarById, getCars } from '../../api/api';
 
 
 interface InitialState {
@@ -26,6 +26,26 @@ export const fetchCars = createAsyncThunk(
 
         if (response.status === 200) {
             return response.data.items;
+        }
+    }
+);
+
+export const fetchCarById = createAsyncThunk(
+    'cars/fetchCarById',
+    async (id: string) => {
+        const response = await getCarById(id);
+        if (response.status === 200) {
+            return response.data;
+        }
+    }
+);
+
+export const fetchToDeletCar = createAsyncThunk(
+    'cars/fetchToDeleteCar',
+    async (id: string) => {
+        const response = await deleteCar(id);
+        if (response.status === 200) {
+            return response.data.id;
         }
     }
 );
@@ -58,10 +78,16 @@ const carsSlice = createSlice({
         builder.addCase(fetchCars.fulfilled, (state, action) => {
             state.items = action.payload;
         })
-    }
+        builder.addCase(fetchCarById.fulfilled, (state, action) => {
+            state.current = action.payload;
+        })
+        builder.addCase(fetchToDeletCar.fulfilled, (state, action) => {
+            state.items = state.items.filter(item => item.id !== action.payload);
+        })
+    },
 });
 
-export const {actions, reducer} = carsSlice;
+export const { actions, reducer } = carsSlice;
 
 export const { setCars, setCurrentCar, addCar, updateCar } = actions;
 

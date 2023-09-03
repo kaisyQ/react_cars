@@ -52,12 +52,12 @@ const authSlice = createSlice({
             const roles: Array<RoleType> = action.payload.roles;
         
             if(roles.find(role => role === ROLE_ADMIN)) {
-                state.role = ROLE_USER; 
+                state.role = ROLE_ADMIN; 
                 return;
             }
         
             if(roles.find(role => role === ROLE_MANAGER)) {
-                state.role = ROLE_USER; 
+                state.role = ROLE_MANAGER; 
                 return;
             }
         

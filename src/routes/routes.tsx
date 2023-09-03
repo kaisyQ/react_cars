@@ -1,6 +1,6 @@
 import CarsContainer from "../components/Cars/CarsContainer";
 
-import CarAbout from "../components/CarAbout/CarAbout";
+import CarAboutContainer from "../components/CarAbout/CarAboutContainer";
 
 import Login from "../components/Login/Login";
 
@@ -17,7 +17,7 @@ const routes: IRoute[] = [
     },
     {
         path: '/cars/:id',
-        element: <CarAbout />
+        element: <CarAboutContainer />
     },
     {
         path: '/cars/create',
