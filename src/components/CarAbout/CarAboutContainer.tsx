@@ -43,7 +43,9 @@ const CarAboutContainer = () => {
 
     return (
         <>
-            <CarAbout role={role} current={current} id={id} deleteCar={() => fetchToDeletCar(id)} />
+            <CarAbout role={role} current={current} id={id} deleteCar={() => {
+                dispatch(fetchToDeletCar(id));
+            }} />
         </>
     );
 }

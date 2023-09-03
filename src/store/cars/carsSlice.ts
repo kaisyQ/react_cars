@@ -44,6 +44,7 @@ export const fetchToDeletCar = createAsyncThunk(
     'cars/fetchToDeleteCar',
     async (id: string) => {
         const response = await deleteCar(id);
+        console.log(response);
         if (response.status === 200) {
             return response.data.id;
         }
