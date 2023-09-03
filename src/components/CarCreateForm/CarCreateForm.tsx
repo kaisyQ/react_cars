@@ -12,15 +12,16 @@ import CarCreateFormElements from "./CarCreateFormElements";
 
 import { LEFT_WHEEL, RIGHT_WHEEL } from "../../constants/constants";
 
-import { createCar } from "../../api/api";
+import type { WheelType } from "../../types/types";
 
 import AddBrand from "../AddBrand/AddBrand";
 
 interface ICarCreateFormProps {
-    brandNames: Array<string>
+    brandNames: Array<string>,
+    createCar: (name: string, brandName: string, wheelPosition: WheelType) => void
 }
 
-const CarCreateForm: React.FC<ICarCreateFormProps> = ({ brandNames }) => {
+const CarCreateForm: React.FC<ICarCreateFormProps> = ({ brandNames, createCar }) => {
 
     const [name, setName] = React.useState('');
     const [brandName, setBrandName] = React.useState('');
@@ -42,6 +43,14 @@ const CarCreateForm: React.FC<ICarCreateFormProps> = ({ brandNames }) => {
             return;
         }
         setLeftWheel(false);
+    }
+
+    const onCreateCarClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
+        ev.preventDefault();
+        
+        if (name && brandName) {
+            createCar(name, brandName, letfWheel ? LEFT_WHEEL : RIGHT_WHEEL)
+        }
     }
     
     return (
@@ -73,17 +82,7 @@ const CarCreateForm: React.FC<ICarCreateFormProps> = ({ brandNames }) => {
                     
                     </CarCreateFormElements.RadioWrapper>
                     
-                    <Button onClick={async (ev) => {
-                        ev.preventDefault();
-                        
-                        const response = await createCar(
-                            name, brandName, letfWheel ? LEFT_WHEEL : RIGHT_WHEEL
-                        );
-
-                        console.log(response);
-                        
-                        
-                    }}>Create</Button>
+                    <Button onClick={onCreateCarClick}>Create</Button>
                 
                 </CarCreateFormElements.Form>
             

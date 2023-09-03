@@ -40,7 +40,7 @@ const CarAboutContainer = () => {
     if (!id || !current) {
         return <Message />
     }
-
+    
     return (
         <>
             <CarAbout role={role} current={current} id={id} deleteCar={() => {
