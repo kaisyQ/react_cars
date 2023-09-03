@@ -69,25 +69,28 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchCheckMe.fulfilled, (state, action) => {
             
-            state.isAuth = true;
-            
-            state.email = action.payload.email;
+            if (action.payload) {
+                
+                state.isAuth = true;
+                
+                state.email = action.payload.email;
 
-            const roles: Array<RoleType> = action.payload.roles;
-        
-            if(roles.find(role => role === ROLE_ADMIN)) {
-                state.role = ROLE_ADMIN; 
-                return;
-            }
-        
-            if(roles.find(role => role === ROLE_MANAGER)) {
-                state.role = ROLE_MANAGER; 
-                return;
-            }
-        
-            if(roles.find(role => role === ROLE_USER)) {
-                state.role = ROLE_USER; 
-                return;
+                const roles: Array<RoleType> = action.payload.roles;
+            
+                if(roles.find(role => role === ROLE_ADMIN)) {
+                    state.role = ROLE_ADMIN; 
+                    return;
+                }
+            
+                if(roles.find(role => role === ROLE_MANAGER)) {
+                    state.role = ROLE_MANAGER; 
+                    return;
+                }
+            
+                if(roles.find(role => role === ROLE_USER)) {
+                    state.role = ROLE_USER; 
+                    return;
+                }
             }
         })
 

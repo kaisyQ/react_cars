@@ -6,11 +6,12 @@ import ListElements from "./DropDownListElements";
 interface IDropDownListProps {
   options: string[],
   onSelect: (option: string) => void,
-  title: string
+  title: string,
+  defaultOption?: string 
 };
 
 
-const DropdownList: React.FC<IDropDownListProps> = ({ options, onSelect, title }) => {
+const DropdownList: React.FC<IDropDownListProps> = ({ options, onSelect, title, defaultOption }) => {
     
     const [isOpen, setIsOpen] = useState(false);
     
@@ -21,6 +22,13 @@ const DropdownList: React.FC<IDropDownListProps> = ({ options, onSelect, title }
         onSelect(option);
         setIsOpen(false);
     };
+
+    React.useEffect(() => {
+        if (!defaultOption) {
+            return;
+        }
+        setSelectedOption(defaultOption);
+    }, [])
 
     return (
         <ListElements.Wrapper>

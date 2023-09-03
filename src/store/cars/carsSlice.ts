@@ -35,7 +35,7 @@ export const fetchCarById = createAsyncThunk(
     async (id: string) => {
         const response = await getCarById(id);
         if (response.status === 200) {
-            return response.data;
+            return response.data.items[0];
         }
     }
 );
@@ -62,7 +62,7 @@ export const fetchToCreateCar = createAsyncThunk(
             const response = await createCar(name, brandName, wheelPosition);
             
             if (response.status === 200) {
-                return response.data;
+                return response.data.items;
             }
     }
 );
@@ -76,7 +76,6 @@ export const fetchToUpdateCar = createAsyncThunk(
         wheelPosition: WheelType
     }) => {
             const response = await updateCar(id, name, brandName, wheelPosition);
-            console.log(response);
     }
 );
 

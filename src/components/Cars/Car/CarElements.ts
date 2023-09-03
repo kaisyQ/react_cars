@@ -24,7 +24,7 @@ const Wrapper = styled.div`
         width: calc((100% / 2) - 20px);
     }
 
-    @media only screen and (max-width: 448px) {
+    @media only screen and (max-width: 486px) {
         width: 100%;
     }
 
@@ -35,7 +35,7 @@ const InfoWrapper = styled.div`
     display: flex;
     
     align-items: center;
-    
+
 `;
 
 const CarInfo = styled.div`
@@ -47,14 +47,20 @@ const CarInfo = styled.div`
 `;
 
 const Model = styled.h4`
+    word-wrap: break-word;
+    word-break: break-all;
 
 `;
 
 const Brand = styled.h5`
+    word-wrap: break-word;
+    word-break: break-all;
 
 `;
 
 const Rudder = styled.h5`
+    word-wrap: break-word;
+    word-break: break-all;
 
 `;
 

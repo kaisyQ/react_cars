@@ -80,6 +80,7 @@ const CarUpdateForm: React.FC<ICarUpdateFormProps> = (props) => {
                                 title="Select brand"
                                 options={props.brandNames} 
                                 onSelect={handleBrandNameSelect}
+                                defaultOption={props.currentCar.brand.name}
                             />
                         </> : null
                     }
