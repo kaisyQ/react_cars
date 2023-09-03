@@ -2,58 +2,29 @@ import React from "react";
 
 import LoginElements from "./LoginElements";
 
-import { signIn } from "../../api/api";
-
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-
-import { setIsAuth, setEmail as setEmailStore, setRole } from "../../store/auth/authSlice";
-
 import Input from "../Ui/Input/Input";
 
 import Button from "../Ui/Button/Button";
-import { getIsAuth } from "../../store/auth/authSelector";
+
 import { Navigate } from "react-router-dom";
 
-import { ROLE_USER, ROLE_MANAGER, ROLE_ADMIN } from "../../constants/constants";
 
-import type { RoleType } from "../../types/types";
+interface ILoginProps {
+    isAuth: boolean,
+    signIn: (email: string, password: string) => void
+}
 
-const Login = () => {
+const Login: React.FC<ILoginProps> = ({ signIn, isAuth }) => {
     
-    const isAuth = useAppSelector(state => getIsAuth(state));
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-
-    const dispatch = useAppDispatch();
 
     const submitLogin = async (ev: React.FormEvent) => {
         
         ev.preventDefault();
         
-        const response = await signIn(email, password);
-    
-        if (response.data) {
-            dispatch(setEmailStore(response.data.email));
-            dispatch(setIsAuth(true));
-            
-            const roles: Array<RoleType> = response.data.roles;
-            
-            if(roles.find(role => role === ROLE_ADMIN)) {
-                dispatch(setRole(ROLE_ADMIN));
-                return;
-            }
-            
-            if(roles.find(role => role === ROLE_MANAGER)) {
-                dispatch(setRole(ROLE_MANAGER));
-                return;
-            }
-            
-            if(roles.find(role => role === ROLE_USER)) {
-                dispatch(setRole(ROLE_USER));
-                return;
-            }
-        }
+        signIn(email, password);
     } 
 
     if (isAuth) {

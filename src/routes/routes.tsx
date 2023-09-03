@@ -2,7 +2,7 @@ import CarsContainer from "../components/Cars/CarsContainer";
 
 import CarAboutContainer from "../components/CarAbout/CarAboutContainer";
 
-import Login from "../components/Login/Login";
+import LoginContainer from "../components/Login/LoginContainer";
 
 import CarCreateFormContainer from "../components/CarCreateForm/CarCreateFormContainer";
 
@@ -29,7 +29,7 @@ const routes: Array<IRoute> = [
     },
     {
         path: '/login',
-        element: <Login />
+        element: <LoginContainer />
     },
 ];
 
