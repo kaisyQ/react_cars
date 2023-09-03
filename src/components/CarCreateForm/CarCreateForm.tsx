@@ -12,37 +12,19 @@ import CarCreateFormElements from "./CarCreateFormElements";
 
 import { LEFT_WHEEL, RIGHT_WHEEL } from "../../constants/constants";
 
-import { getBrandNames } from "../../store/brands/brandsSelector";
-
-import { getBrandsNames as getBrandNamesFromServer } from "../../api/api";
-
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-
-import { setBrandNames } from "../../store/brands/brandsSlice";
-
 import { createCar } from "../../api/api";
 
 import AddBrand from "../AddBrand/AddBrand";
 
-const CarCreateForm = () => {
+interface ICarCreateFormProps {
+    brandNames: Array<string>
+}
+
+const CarCreateForm: React.FC<ICarCreateFormProps> = ({ brandNames }) => {
 
     const [name, setName] = React.useState('');
     const [brandName, setBrandName] = React.useState('');
     const [letfWheel, setLeftWheel] = React.useState(false);
-
-    const dispatch = useAppDispatch();
-
-    const brandNames = useAppSelector(state => getBrandNames(state));
-
-    React.useEffect(() => {
-
-        const fetchBrandNames = async () => {
-            const response = await getBrandNamesFromServer();
-            dispatch(setBrandNames(response.data));
-        }
-
-        fetchBrandNames();
-    }, [])
 
     const handleBrandNameSelect = (option: string) => {
         setBrandName(option);

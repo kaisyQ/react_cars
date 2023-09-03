@@ -6,7 +6,7 @@ import Login from "../components/Login/Login";
 
 import CarUpdateForm from "../components/CarUpdateForm/CarUpdateForm";
 
-import CarCreateForm from "../components/CarCreateForm/CarCreateForm";
+import CarCreateFormContainer from "../components/CarCreateForm/CarCreateFormContainer";
 
 import type { IRoute } from "../types/types";
 
@@ -21,7 +21,7 @@ const routes: IRoute[] = [
     },
     {
         path: '/cars/create',
-        element: <CarCreateForm />
+        element: <CarCreateFormContainer />
     },
     {
         path: '/cars/update/:id',
