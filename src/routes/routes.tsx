@@ -4,13 +4,13 @@ import CarAboutContainer from "../components/CarAbout/CarAboutContainer";
 
 import Login from "../components/Login/Login";
 
-import CarUpdateForm from "../components/CarUpdateForm/CarUpdateForm";
-
 import CarCreateFormContainer from "../components/CarCreateForm/CarCreateFormContainer";
+
+import CarUpdateFormContainer from "../components/CarUpdateForm/CarUpdateFormContainer";
 
 import type { IRoute } from "../types/types";
 
-const routes: IRoute[] = [
+const routes: Array<IRoute> = [
     {
         path: '/',
         element: <CarsContainer /> 
@@ -25,7 +25,7 @@ const routes: IRoute[] = [
     },
     {
         path: '/cars/update/:id',
-        element: <CarUpdateForm />
+        element: <CarUpdateFormContainer />
     },
     {
         path: '/login',

@@ -8,77 +8,42 @@ import Radio from "../Ui/Radio/Radio";
 
 import DropdownList from "../Ui/DropDownList/DropDownList";
 
-import { useParams } from "react-router-dom";
-
-import { getCarById, updateCar } from "../../api/api";
-
-import { setCurrentCar } from "../../store/cars/carsSlice";
-
-import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-
-import { getCurrentCar } from "../../store/cars/carsSelector";
+import { updateCar } from "../../api/api";
 
 import { LEFT_WHEEL, RIGHT_WHEEL } from "../../constants/constants";
 
-import { getBrandNames } from "../../store/brands/brandsSelector";
-
-import { getBrandsNames as getBrandNamesFromServer } from "../../api/api";
-
-import { setBrandNames } from "../../store/brands/brandsSlice";
-
 import CarUpdateFormElements from "./CarUpdateFormElements";
 
-const CarUpdateForm = () => {
+import type { ICar, WheelType } from "../../types/types";
 
-    const currentCar = useAppSelector(state => getCurrentCar(state));
+interface ICarUpdateFormProps {
+    
+    id: string,
+
+    currentCar: ICar,
+    
+    brandNames: Array<string>,
+    
+    updateCar: (id: string, name: string, brandName: string, wheelPosition: WheelType) => void
+}
+
+const CarUpdateForm: React.FC<ICarUpdateFormProps> = (props) => {
 
     const [name, setName] = React.useState('');
     const [brandName, setBrandName] = React.useState('');
     const [letfWheel, setLeftWheel] = React.useState(false);
-    
-    const { id } = useParams();
-
-    const dispatch = useAppDispatch();
-
-    const brandNames = useAppSelector(state => getBrandNames(state));
 
     React.useEffect(() => {
 
-        if (!currentCar) {
+        if (!props.currentCar) {
             return;
         }
-        setName(currentCar.name);
-        setBrandName(currentCar.brand.name);
-        setLeftWheel(currentCar.brand.wheelPosition === LEFT_WHEEL);
+        setName(props.currentCar.name);
+        setBrandName(props.currentCar.brand.name);
+        setLeftWheel(props.currentCar.brand.wheelPosition === LEFT_WHEEL);
 
-    }, [currentCar])
+    }, [props.currentCar])
 
-    
-    React.useEffect(() => {
-
-        const fetchCarById = async () => {
-            if (!id) {
-                return;
-            }
-            
-            const response = await getCarById(id);
-
-            dispatch(setCurrentCar(response.data));
-        }
-
-        fetchCarById();
-
-    }, []);
-
-    React.useEffect(() => {
-
-        const fetchBrandNames = async () => {
-            const response = await getBrandNamesFromServer();
-            dispatch(setBrandNames(response.data));
-        }
-
-        fetchBrandNames();
-    }, [])
 
     const handleBrandNameSelect = (option: string) => {
         setBrandName(option);
@@ -98,7 +63,11 @@ const CarUpdateForm = () => {
         setLeftWheel(false);
     }
 
-    console.log(currentCar)
+    const onCarUpdateBtnClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
+        ev.preventDefault();
+        props.updateCar(props.id, name, brandName, letfWheel ? LEFT_WHEEL : RIGHT_WHEEL);
+    }
+
     return (
         <>
             <CarUpdateFormElements.Wrapper>
@@ -108,10 +77,10 @@ const CarUpdateForm = () => {
                     <Input title="Name*" value={name} onChange={(ev) => setName(ev.target.value)}/>
     
                     {
-                        brandNames ? <>
+                        props.brandNames ? <>
                             <DropdownList 
                                 title="Select brand"
-                                options={brandNames} 
+                                options={props.brandNames} 
                                 onSelect={handleBrandNameSelect}
                             />
                         </> : null
@@ -125,19 +94,7 @@ const CarUpdateForm = () => {
                     
                     </CarUpdateFormElements.RadioWrapper>
         
-                    <Button onClick={async (ev) => {
-                        ev.preventDefault();
-                        
-                        if (!id) {
-                            return;
-                        }
-                        const response = await updateCar(
-                            id, name, brandName, letfWheel ? LEFT_WHEEL : RIGHT_WHEEL  
-                        )
-
-                        console.log(response)
-
-                    }}>Update</Button>
+                    <Button onClick={onCarUpdateBtnClick}>Update</Button>
 
                 </CarUpdateFormElements.Form>
 
