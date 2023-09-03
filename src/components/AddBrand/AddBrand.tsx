@@ -4,13 +4,13 @@ import Input from "../Ui/Input/Input";
 
 import Button from "../Ui/Button/Button";
 
-import { createBrand } from "../../api/api";
-
-import { addBrandName } from "../../store/brands/brandsSlice";
-
 import { useAppDispatch } from "../../hooks/hooks";
 
-const AddBrand = () => {
+interface IAddBrandProps {
+    createBrand: (brandName: string) => void
+}
+
+const AddBrand: React.FC<IAddBrandProps> = ({ createBrand }) => {
 
     const [isAddMode, setIsAddMode] = React.useState(false);
 
@@ -18,17 +18,13 @@ const AddBrand = () => {
 
     const dispatch = useAppDispatch();
 
-    const onCreateBtnClick = async (ev: React.MouseEvent<HTMLButtonElement>) => {
+    const onCreateBtnClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault();
         if(!brandName) {
             return;
         }
-        
-        const response = await createBrand(brandName);
-        console.log(response)
-        dispatch(addBrandName(response.data.brandName));
-
-    } 
+        createBrand(brandName);
+    }
 
     return (
         <>

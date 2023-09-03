@@ -8,8 +8,6 @@ import Radio from "../Ui/Radio/Radio";
 
 import DropdownList from "../Ui/DropDownList/DropDownList";
 
-import { updateCar } from "../../api/api";
-
 import { LEFT_WHEEL, RIGHT_WHEEL } from "../../constants/constants";
 
 import CarUpdateFormElements from "./CarUpdateFormElements";

@@ -14,7 +14,7 @@ import { LEFT_WHEEL, RIGHT_WHEEL } from "../../constants/constants";
 
 import type { WheelType } from "../../types/types";
 
-import AddBrand from "../AddBrand/AddBrand";
+import AddBrandContainer from "../AddBrand/AddBrandContainer";
 
 interface ICarCreateFormProps {
     brandNames: Array<string>,
@@ -72,7 +72,7 @@ const CarCreateForm: React.FC<ICarCreateFormProps> = ({ brandNames, createCar })
                         </> : null
                     }
 
-                    <AddBrand />
+                    <AddBrandContainer />
                     
                     <CarCreateFormElements.RadioWrapper>
                     

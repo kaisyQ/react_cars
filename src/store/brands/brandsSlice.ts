@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { getBrandsNames } from '../../api/api';
 
+import { createBrand } from '../../api/api';
+
 interface IBrandSliceInitialState {
     brandNames: string[]
 }
@@ -18,7 +20,16 @@ export const fetchBrands = createAsyncThunk(
             return response.data;
         }
     }
+);
+
+export const fetchToCreateBrand = createAsyncThunk(
+    'brands/fetchToCreateBrand',
+    async (brandName: string) => {
+        const response = await createBrand(brandName);
+        return response.data.brandName;
+    }
 )
+
 const brandsSlice = createSlice({
     name: 'brandSlice',
     initialState,
@@ -33,6 +44,9 @@ const brandsSlice = createSlice({
     extraReducers(builder) {
         builder.addCase(fetchBrands.fulfilled, (state, action) => {
             state.brandNames = action.payload;
+        })
+        builder.addCase(fetchToCreateBrand.fulfilled, (state, action) => {
+            state.brandNames.push(action.payload);
         })
     },
 });
