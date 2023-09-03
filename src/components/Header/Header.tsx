@@ -6,25 +6,21 @@ import HeaderElements from './HeaderElements';
 
 import { NavLink } from 'react-router-dom';
 
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-
-import { getEmail, getIsAuth } from '../../store/auth/authSelector';
-
 import Button from '../Ui/Button/Button';
 
 import { BoxArrowRight } from 'react-bootstrap-icons';
 
-import { logout } from '../../api/api';
+interface IHeaderProps {
+    email: string | null,
+    isAuth: boolean,
+    logout: () => void
+}
 
-import { setEmail, setRole, setIsAuth } from '../../store/auth/authSlice';
-
-const Header = () => {
+const Header: React.FC<IHeaderProps> = ({ logout, email, isAuth }) => {
     
-    const email = useAppSelector(state => getEmail(state));
-    
-    const isAuth = useAppSelector(state => getIsAuth(state));
-    
-    const dispatch = useAppDispatch();
+    const onLogoutBtnClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
+        logout();
+    }
 
     return (
         <>
@@ -51,14 +47,7 @@ const Header = () => {
                                 { email }
                             </HeaderElements.Email>
                             
-                            <button onClick={async () => {
-                                const response = await logout();
-                                if (response.status === 200) {
-                                    dispatch(setEmail(null)); 
-                                    dispatch(setRole(null)); 
-                                    dispatch(setIsAuth(false));
-                                }
-                            }}>
+                            <button onClick={onLogoutBtnClick}>
                                 <BoxArrowRight size={'3rem'} color='white' cursor={'pointer'} />
                             </button>
                         </HeaderElements.UserWrapper>

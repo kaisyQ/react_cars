@@ -2,7 +2,7 @@ import React from 'react';
 
 import MainRouter from './components/MainRouter/MainRouter';
 
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 import Footer from './components/Footer/Footer';
 
@@ -16,7 +16,7 @@ const App = () => {
     
     <AppElements.Wrapper className="App">
     
-        <Header />     
+        <HeaderContainer />     
 
         <CarsNav />
 

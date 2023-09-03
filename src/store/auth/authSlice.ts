@@ -4,7 +4,7 @@ import type { RoleType } from '../../types/types';
 
 import { ROLE_USER, ROLE_MANAGER, ROLE_ADMIN } from '../../constants/constants';
 
-import { checkMe, signIn } from '../../api/api';
+import { checkMe, logout, signIn } from '../../api/api';
 
 interface AuthInitialState {
     isAuth: boolean,
@@ -40,6 +40,16 @@ export const fetchToLogin = createAsyncThunk(
         }
     }
 );
+
+export const fetchToLogout = createAsyncThunk(
+    'auth/logout',
+    async () => {
+        const response = await logout();
+        if (response.status === 200) {
+            return true;
+        }
+    }
+)
 
 
 const authSlice = createSlice({
@@ -101,6 +111,14 @@ const authSlice = createSlice({
             if(roles.find(role => role === ROLE_USER)) {
                 state.role = ROLE_USER; 
                 return;
+            }
+        })
+
+        builder.addCase(fetchToLogout.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.email = null; 
+                state.role = null;
+                state.isAuth = false;
             }
         })
     }
