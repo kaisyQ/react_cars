@@ -4,8 +4,6 @@ import CarsElements from './CarsElements';
 
 import Car from './Car/Car';
 
-import axios from 'axios';
-
 import { getCarsItems } from '../../store/cars/carsSelector';
 
 import { setCars } from '../../store/cars/carsSlice';
@@ -14,25 +12,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { getCars } from '../../api/api';
 
+import { ICar } from '../../types/types';
 
 
+interface ICarsProps {
+    cars: Array<ICar>
+}
 
-const Cars = () => {
-
-    const cars = useAppSelector(state => getCarsItems(state));
-
-    const dispatch = useAppDispatch();
-
-    React.useEffect(() => {
-        const fetch = async function () {
-            
-            const response = await getCars();
-            
-            dispatch(setCars(response.data.items));
-
-        }
-        fetch();
-    }, [])
+const Cars: React.FC<ICarsProps> = ({ cars }) => {
 
     return (
         <>
@@ -41,7 +28,7 @@ const Cars = () => {
                 <CarsElements.Wrapper>
 
                     {
-                        cars.map(car => <Car key={car.id} {...car}/>)
+                        cars.map(car => <Car key={car.id} {...car} />)
                     }
 
                 </CarsElements.Wrapper>

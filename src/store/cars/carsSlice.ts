@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import type { ICar } from '../../types/types';
+import { getCars } from '../../api/api';
 
 
 interface InitialState {
@@ -16,6 +17,18 @@ const initialState: InitialState = {
 
     current: null
 };
+
+
+export const fetchCars = createAsyncThunk(
+    'cars/fetchCars', 
+    async () => {
+        const response = await getCars();
+
+        if (response.status === 200) {
+            return response.data.items;
+        }
+    }
+);
 
 const carsSlice = createSlice({
     name: 'carsSlice', 
@@ -40,6 +53,11 @@ const carsSlice = createSlice({
                 }
             })
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchCars.fulfilled, (state, action) => {
+            state.items = action.payload;
+        })
     }
 });
 

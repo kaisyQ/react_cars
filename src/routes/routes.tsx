@@ -1,7 +1,11 @@
-import Cars from "../components/Cars/Cars";
+import CarsContainer from "../components/Cars/CarsContainer";
+
 import CarAbout from "../components/CarAbout/CarAbout";
+
 import Login from "../components/Login/Login";
+
 import CarUpdateForm from "../components/CarUpdateForm/CarUpdateForm";
+
 import CarCreateForm from "../components/CarCreateForm/CarCreateForm";
 
 import type { IRoute } from "../types/types";
@@ -9,7 +13,7 @@ import type { IRoute } from "../types/types";
 const routes: IRoute[] = [
     {
         path: '/',
-        element: <Cars /> 
+        element: <CarsContainer /> 
     },
     {
         path: '/cars/:id',
