@@ -1,6 +1,23 @@
-# Getting Started with Create React App
+# frontend for symfony_cars_api
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## directories
+### components (all react components)
+### routes (all routes)
+### types (all types definitions)
+### store (redux-store and reducers)
+
+## Routes
+### '/' - to see all cars
+### '/cars/{id}' - to see car with id
+### '/cars/create '- to create car (you can open it only if you have admin role)
+### '/cars/update/{id}' to update car with id (you can open it only if you have manager or admin role)
+### '/login' to login
+### '/users/create' - public route where you can create admin or manager to check previous routes
+
+
+
+
+.
 
 ## Available Scripts
 
