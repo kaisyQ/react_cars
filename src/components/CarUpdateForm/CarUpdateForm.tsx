@@ -6,6 +6,8 @@ import Input from "../Ui/Input/Input";
 
 import Radio from "../Ui/Radio/Radio";
 
+import { NavLink, useNavigate } from "react-router-dom";
+
 import DropdownList from "../Ui/DropDownList/DropDownList";
 
 import { LEFT_WHEEL, RIGHT_WHEEL } from "../../constants/constants";
@@ -26,6 +28,8 @@ interface ICarUpdateFormProps {
 }
 
 const CarUpdateForm: React.FC<ICarUpdateFormProps> = (props) => {
+
+    const navigate = useNavigate();
 
     const [name, setName] = React.useState('');
     const [brandName, setBrandName] = React.useState('');
@@ -64,6 +68,7 @@ const CarUpdateForm: React.FC<ICarUpdateFormProps> = (props) => {
     const onCarUpdateBtnClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault();
         props.updateCar(props.id, name, brandName, letfWheel ? LEFT_WHEEL : RIGHT_WHEEL);
+        navigate(`/cars/${props.id}`);
     }
 
     return (
@@ -93,7 +98,9 @@ const CarUpdateForm: React.FC<ICarUpdateFormProps> = (props) => {
                     
                     </CarUpdateFormElements.RadioWrapper>
         
-                    <Button onClick={onCarUpdateBtnClick}>Update</Button>
+                    <NavLink to={`cars/${props.id}`}>
+                        <Button onClick={onCarUpdateBtnClick}>Update</Button>
+                    </NavLink>
 
                 </CarUpdateFormElements.Form>
 

@@ -19,7 +19,7 @@ const Input: React.FC<IInputProps> = (props) => {
             
                 <InputElements.Label>
                     
-                    <InputElements.LabelSpan value={props.value} focused={focused}>
+                    <InputElements.LabelSpan value={props.value} focused={focused&&focused}>
                         {props.title}
                     </InputElements.LabelSpan>
                 

@@ -4,7 +4,8 @@ import Input from "../Ui/Input/Input";
 
 import Button from "../Ui/Button/Button";
 
-import { useAppDispatch } from "../../hooks/hooks";
+import AddBrandElements from "./AddBrandElements";
+
 
 interface IAddBrandProps {
     createBrand: (brandName: string) => void
@@ -16,8 +17,6 @@ const AddBrand: React.FC<IAddBrandProps> = ({ createBrand }) => {
 
     const [brandName, setBrandName] = React.useState('');
 
-    const dispatch = useAppDispatch();
-
     const onCreateBtnClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
         ev.preventDefault();
         if(!brandName) {
@@ -26,15 +25,20 @@ const AddBrand: React.FC<IAddBrandProps> = ({ createBrand }) => {
         createBrand(brandName);
     }
 
+    const onCloseEditingClick = (ev: React.MouseEvent<HTMLButtonElement>) => {
+        ev.preventDefault();
+        setIsAddMode(false);
+    }
+
     return (
         <>
-            <div>
+            <AddBrandElements.Wrapper>
 
                 {
                    
                     isAddMode ? <>
                     
-                        <div>
+                        <AddBrandElements.CreateBlock>
                             
                             <Input 
                                 title="Brand Name*" 
@@ -42,8 +46,19 @@ const AddBrand: React.FC<IAddBrandProps> = ({ createBrand }) => {
                                 onChange={(ev) => setBrandName(ev.target.value)}
                             />
                             
-                            <Button onClick={onCreateBtnClick}>Create</Button> 
-                        </div>
+
+                            <AddBrandElements.Btns>
+                            
+                                <Button onClick={onCreateBtnClick}>
+                                    Create
+                                </Button> 
+                        
+                                <Button onClick={onCloseEditingClick}>
+                                    Stop Editing
+                                </Button>
+                        
+                            </AddBrandElements.Btns>
+                        </AddBrandElements.CreateBlock>
                     </>
                     : 
                     
@@ -55,7 +70,7 @@ const AddBrand: React.FC<IAddBrandProps> = ({ createBrand }) => {
 
                 }
 
-            </div>
+            </AddBrandElements.Wrapper>
         </>
     );
 }

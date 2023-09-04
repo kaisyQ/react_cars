@@ -9,7 +9,7 @@ interface IRadioProps {
 }
 
 const Radio: React.FC<IRadioProps> = ({checked, onChange, text}) => {
-    console.log(checked);
+
     return (
         <>
             <RadioElements.Wrapper checked={checked}>

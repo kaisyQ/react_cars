@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import type { ICar, WheelType } from '../../types/types';
+
 import { createCar, deleteCar, getCarById, getCars, updateCar } from '../../api/api';
 
 
@@ -62,7 +63,7 @@ export const fetchToCreateCar = createAsyncThunk(
             const response = await createCar(name, brandName, wheelPosition);
             
             if (response.status === 200) {
-                return response.data.items;
+                return response.data.items[0];
             }
     }
 );
@@ -76,6 +77,7 @@ export const fetchToUpdateCar = createAsyncThunk(
         wheelPosition: WheelType
     }) => {
             const response = await updateCar(id, name, brandName, wheelPosition);
+            console.log(response);
     }
 );
 

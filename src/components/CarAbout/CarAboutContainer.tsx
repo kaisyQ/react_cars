@@ -10,7 +10,7 @@ import { getCurrentCar } from "../../store/cars/carsSelector";
 
 import { getRole } from "../../store/auth/authSelector";
 
-import { fetchCarById, fetchToDeletCar } from "../../store/cars/carsSlice";
+import { fetchCarById, fetchToDeletCar, setCurrentCar } from "../../store/cars/carsSlice";
 
 import CarAbout from "./CarAbout";
 
@@ -34,6 +34,9 @@ const CarAboutContainer = () => {
 
         dispatch(fetchCarById(id));
 
+        return () => {
+            dispatch(setCurrentCar(null));
+        }
     }, []);
     
 
