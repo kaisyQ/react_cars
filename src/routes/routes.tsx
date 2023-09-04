@@ -9,6 +9,7 @@ import CarCreateFormContainer from "../components/CarCreateForm/CarCreateFormCon
 import CarUpdateFormContainer from "../components/CarUpdateForm/CarUpdateFormContainer";
 
 import type { IRoute } from "../types/types";
+import Users from "../components/Users/UserCreate";
 
 const routes: Array<IRoute> = [
     {
@@ -31,6 +32,10 @@ const routes: Array<IRoute> = [
         path: '/login',
         element: <LoginContainer />
     },
+    {
+        path: '/users/create',
+        element: <Users />
+    }
 ];
 
 export default routes;
